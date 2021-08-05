@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31313.79
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guilherme.LojaVirtualApi", "Guilherme.LojaVirtualApi.csproj", "{8ABFDF4B-8E13-4B4A-BD3C-F1139A6DBE70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guilherme.LojaVirtualApi.Tests", "..\Guilherme.LojaVirtualApi.Tests\Guilherme.LojaVirtualApi.Tests.csproj", "{41FD9618-9A59-48DC-8E8B-DAF7478B6011}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guilherme.LojaVirtualApi.Services", "..\Guilherme.LojaVirtualApi.Services\Guilherme.LojaVirtualApi.Services.csproj", "{D1D0F732-67CB-4AA9-BA85-934AE2C5F9FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guilherme.LojaVirtualApi.Repository", "..\Guilherme.LojaVirtualApi.Repository\Guilherme.LojaVirtualApi.Repository.csproj", "{D861CB06-334A-4BAE-92B2-B3A1655C1B5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guilherme.LojaVirtualApi.Models", "..\Guilherme.LojaVirtualApi.Models\Guilherme.LojaVirtualApi.Models.csproj", "{48BA36D5-77F6-43ED-A64E-85352FFB3FD3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8ABFDF4B-8E13-4B4A-BD3C-F1139A6DBE70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ABFDF4B-8E13-4B4A-BD3C-F1139A6DBE70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ABFDF4B-8E13-4B4A-BD3C-F1139A6DBE70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ABFDF4B-8E13-4B4A-BD3C-F1139A6DBE70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41FD9618-9A59-48DC-8E8B-DAF7478B6011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41FD9618-9A59-48DC-8E8B-DAF7478B6011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41FD9618-9A59-48DC-8E8B-DAF7478B6011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41FD9618-9A59-48DC-8E8B-DAF7478B6011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1D0F732-67CB-4AA9-BA85-934AE2C5F9FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1D0F732-67CB-4AA9-BA85-934AE2C5F9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1D0F732-67CB-4AA9-BA85-934AE2C5F9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1D0F732-67CB-4AA9-BA85-934AE2C5F9FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D861CB06-334A-4BAE-92B2-B3A1655C1B5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D861CB06-334A-4BAE-92B2-B3A1655C1B5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D861CB06-334A-4BAE-92B2-B3A1655C1B5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D861CB06-334A-4BAE-92B2-B3A1655C1B5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48BA36D5-77F6-43ED-A64E-85352FFB3FD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48BA36D5-77F6-43ED-A64E-85352FFB3FD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48BA36D5-77F6-43ED-A64E-85352FFB3FD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48BA36D5-77F6-43ED-A64E-85352FFB3FD3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34EF090B-F5B1-462D-A6F3-7580BD7A8A0A}
+	EndGlobalSection
+EndGlobal
