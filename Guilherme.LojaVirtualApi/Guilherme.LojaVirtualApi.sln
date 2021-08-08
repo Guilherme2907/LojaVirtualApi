@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guilherme.LojaVirtualApi", "Guilherme.LojaVirtualApi.csproj", "{8ABFDF4B-8E13-4B4A-BD3C-F1139A6DBE70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Guilherme.LojaVirtualApi", "Guilherme.LojaVirtualApi.csproj", "{8ABFDF4B-8E13-4B4A-BD3C-F1139A6DBE70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guilherme.LojaVirtualApi.Tests", "..\Guilherme.LojaVirtualApi.Tests\Guilherme.LojaVirtualApi.Tests.csproj", "{41FD9618-9A59-48DC-8E8B-DAF7478B6011}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Guilherme.LojaVirtualApi.Tests", "..\Guilherme.LojaVirtualApi.Tests\Guilherme.LojaVirtualApi.Tests.csproj", "{41FD9618-9A59-48DC-8E8B-DAF7478B6011}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guilherme.LojaVirtualApi.Services", "..\Guilherme.LojaVirtualApi.Services\Guilherme.LojaVirtualApi.Services.csproj", "{D1D0F732-67CB-4AA9-BA85-934AE2C5F9FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Guilherme.LojaVirtualApi.Services", "..\Guilherme.LojaVirtualApi.Services\Guilherme.LojaVirtualApi.Services.csproj", "{D1D0F732-67CB-4AA9-BA85-934AE2C5F9FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guilherme.LojaVirtualApi.Repository", "..\Guilherme.LojaVirtualApi.Repository\Guilherme.LojaVirtualApi.Repository.csproj", "{D861CB06-334A-4BAE-92B2-B3A1655C1B5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Guilherme.LojaVirtualApi.Repository", "..\Guilherme.LojaVirtualApi.Repository\Guilherme.LojaVirtualApi.Repository.csproj", "{D861CB06-334A-4BAE-92B2-B3A1655C1B5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guilherme.LojaVirtualApi.Models", "..\Guilherme.LojaVirtualApi.Models\Guilherme.LojaVirtualApi.Models.csproj", "{48BA36D5-77F6-43ED-A64E-85352FFB3FD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Guilherme.LojaVirtualApi.Models", "..\Guilherme.LojaVirtualApi.Models\Guilherme.LojaVirtualApi.Models.csproj", "{48BA36D5-77F6-43ED-A64E-85352FFB3FD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
