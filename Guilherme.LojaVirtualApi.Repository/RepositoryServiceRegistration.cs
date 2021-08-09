@@ -9,7 +9,7 @@ namespace Guilherme.LojaVirtualApi.Repository
         public static IServiceCollection AddRepositoryServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<EFContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("LojaVirtualApiConnectionString")));
+                options.UseSqlServer(configuration.GetConnectionString("LojaVirtualApiConnectionString"),action => action.MigrationsAssembly("Guilherme.LojaVirtualApi")));
 
             return services;
         }
