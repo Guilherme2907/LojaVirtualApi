@@ -13,6 +13,6 @@ namespace Guilherme.LojaVirtualApi.Models.Entities
         public CustomerType CustomerType { get; set; }
         public IEnumerable<Address> Addresses { get; set; }
         public IEnumerable<Order> Orders { get; set; }
-        public IEnumerable<Telephone> Telephone { get; set; }
+        public IEnumerable<Telephone> Telephones { get; set; }
     }
 }

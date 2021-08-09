@@ -7,5 +7,6 @@ namespace Guilherme.LojaVirtualApi.Models.Entities
         public PaymentStatus PaymentStatus { get; set; }
 
         public Order Order { get; set; }
+        public long OrderId { get; set; }
     }
 }

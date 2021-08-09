@@ -6,8 +6,7 @@ namespace Guilherme.LojaVirtualApi.Models.Entities
     {
         public string Name { get; set; }
         public double Price { get; set; }
-        public IEnumerable<Category> Categories { get; set; }
-
+        public IEnumerable<CategoryProduct> CategoryProducts { get; set; }
         public IEnumerable<OrderProduct> OrderProducts { get; set; }
     }
 }

@@ -8,6 +8,8 @@
         public string Block { get; set; }
         public string ZipCode { get; set; }
         public Customer Customer { get; set; }
+        public long CustomerId { get; set; }
         public City City { get; set; }
+        public long CityId { get; set; }
     }
 }

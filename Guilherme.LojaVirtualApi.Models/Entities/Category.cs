@@ -6,6 +6,6 @@ namespace Guilherme.LojaVirtualApi.Models.Entities
     {
         public string Name { get; set; }
 
-        public IEnumerable<Product> Products{ get; set; }
+        public IEnumerable<CategoryProduct> CategoryProducts { get; set; }
     }
 }
