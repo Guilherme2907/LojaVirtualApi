@@ -1,4 +1,5 @@
 ﻿using Guilherme.LojaVirtualApi.Models.Entities.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Guilherme.LojaVirtualApi.Models.Entities
@@ -11,8 +12,9 @@ namespace Guilherme.LojaVirtualApi.Models.Entities
         public string Cpf { get; set; }
         public string Cnpj { get; set; }
         public CustomerType CustomerType { get; set; }
-        public IEnumerable<Address> Addresses { get; set; }
-        public IEnumerable<Order> Orders { get; set; }
-        public IEnumerable<Telephone> Telephones { get; set; }
+        public virtual ICollection<Address> Addresses { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Telephone> Telephones { get; set; }
     }
 }

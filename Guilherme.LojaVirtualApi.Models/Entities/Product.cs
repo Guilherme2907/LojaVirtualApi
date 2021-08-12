@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Guilherme.LojaVirtualApi.Models.Entities
 {
@@ -6,7 +7,9 @@ namespace Guilherme.LojaVirtualApi.Models.Entities
     {
         public string Name { get; set; }
         public double Price { get; set; }
-        public IEnumerable<CategoryProduct> CategoryProducts { get; set; }
-        public IEnumerable<OrderProduct> OrderProducts { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Category> Categories { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<OrderItem> Items { get; set; }
     }
 }

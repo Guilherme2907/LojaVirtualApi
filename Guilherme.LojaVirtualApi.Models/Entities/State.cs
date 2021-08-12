@@ -5,6 +5,6 @@ namespace Guilherme.LojaVirtualApi.Models.Entities
     public class State : BaseEntity
     {
         public string Name { get; set; }
-        public IEnumerable<City> Cities { get; set; }
+        public virtual ICollection<City> Cities { get; set; }
     }
 }

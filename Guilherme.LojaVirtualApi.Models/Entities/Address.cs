@@ -1,4 +1,6 @@
-﻿namespace Guilherme.LojaVirtualApi.Models.Entities
+﻿using Newtonsoft.Json;
+
+namespace Guilherme.LojaVirtualApi.Models.Entities
 {
     public class Address : BaseEntity
     {
@@ -7,9 +9,12 @@
         public string Complement { get; set; }
         public string Block { get; set; }
         public string ZipCode { get; set; }
-        public Customer Customer { get; set; }
+        [JsonIgnore]
+        public virtual Customer Customer { get; set; }
+        [JsonIgnore]
         public long CustomerId { get; set; }
-        public City City { get; set; }
+        public virtual City City { get; set; }
+        [JsonIgnore]
         public long CityId { get; set; }
     }
 }
