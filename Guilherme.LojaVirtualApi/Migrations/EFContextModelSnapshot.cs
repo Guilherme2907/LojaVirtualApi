@@ -19,21 +19,41 @@ namespace Guilherme.LojaVirtualApi.Migrations
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CategoryProduct", b =>
+                {
+                    b.Property<long>("CategoriesId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ProductsId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("CategoriesId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("category-products");
+                });
+
             modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.Address", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Block")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("block");
 
                     b.Property<long>("CityId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Complement")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("complement");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -45,13 +65,19 @@ namespace Guilherme.LojaVirtualApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("number");
 
                     b.Property<string>("Street")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("street");
 
                     b.Property<string>("ZipCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("zipCode");
 
                     b.HasKey("Id");
 
@@ -59,7 +85,7 @@ namespace Guilherme.LojaVirtualApi.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("addresses");
 
                     b.HasData(
                         new
@@ -68,7 +94,7 @@ namespace Guilherme.LojaVirtualApi.Migrations
                             Block = "Jardim",
                             CityId = 1L,
                             Complement = "Apto 203",
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 349, DateTimeKind.Local).AddTicks(9485),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 293, DateTimeKind.Local).AddTicks(3994),
                             CustomerId = 1L,
                             Number = "300",
                             Street = "Rua das Flores",
@@ -80,7 +106,7 @@ namespace Guilherme.LojaVirtualApi.Migrations
                             Block = "Centro",
                             CityId = 2L,
                             Complement = "Sala 800",
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 349, DateTimeKind.Local).AddTicks(9576),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 293, DateTimeKind.Local).AddTicks(4137),
                             CustomerId = 1L,
                             Number = "105",
                             Street = "Avenida Matos",
@@ -93,6 +119,9 @@ namespace Guilherme.LojaVirtualApi.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedDate")
@@ -102,78 +131,27 @@ namespace Guilherme.LojaVirtualApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("categories");
 
                     b.HasData(
                         new
                         {
                             Id = 1L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 348, DateTimeKind.Local).AddTicks(628),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 291, DateTimeKind.Local).AddTicks(4992),
                             Name = "Informatica"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 348, DateTimeKind.Local).AddTicks(663),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 291, DateTimeKind.Local).AddTicks(5034),
                             Name = "Escritorio"
-                        });
-                });
-
-            modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.CategoryProduct", b =>
-                {
-                    b.Property<long>("ProductId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("CategoryId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ProductId", "CategoryId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("CategoryProducts");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 1L,
-                            CategoryId = 1L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 350, DateTimeKind.Local).AddTicks(1059),
-                            Id = 1L
-                        },
-                        new
-                        {
-                            ProductId = 2L,
-                            CategoryId = 1L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 350, DateTimeKind.Local).AddTicks(1099),
-                            Id = 2L
-                        },
-                        new
-                        {
-                            ProductId = 2L,
-                            CategoryId = 2L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 350, DateTimeKind.Local).AddTicks(1103),
-                            Id = 3L
-                        },
-                        new
-                        {
-                            ProductId = 3L,
-                            CategoryId = 1L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 350, DateTimeKind.Local).AddTicks(1106),
-                            Id = 4L
                         });
                 });
 
@@ -182,6 +160,9 @@ namespace Guilherme.LojaVirtualApi.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedDate")
@@ -191,7 +172,10 @@ namespace Guilherme.LojaVirtualApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("name");
 
                     b.Property<long>("StateId")
                         .HasColumnType("bigint");
@@ -200,27 +184,27 @@ namespace Guilherme.LojaVirtualApi.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.ToTable("Cities");
+                    b.ToTable("cities");
 
                     b.HasData(
                         new
                         {
                             Id = 1L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 349, DateTimeKind.Local).AddTicks(5392),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 292, DateTimeKind.Local).AddTicks(9713),
                             Name = "Uberlândia",
                             StateId = 1L
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 349, DateTimeKind.Local).AddTicks(5450),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 292, DateTimeKind.Local).AddTicks(9774),
                             Name = "São Paulo",
                             StateId = 2L
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 349, DateTimeKind.Local).AddTicks(5454),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 292, DateTimeKind.Local).AddTicks(9778),
                             Name = "Campinas",
                             StateId = 2L
                         });
@@ -231,13 +215,18 @@ namespace Guilherme.LojaVirtualApi.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Cnpj")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("cnpj");
 
                     b.Property<string>("Cpf")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("cpf");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -246,27 +235,31 @@ namespace Guilherme.LojaVirtualApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("email");
 
                     b.Property<DateTime?>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("customers");
 
                     b.HasData(
                         new
                         {
                             Id = 1L,
                             Cpf = "36378912377",
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 348, DateTimeKind.Local).AddTicks(3510),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 291, DateTimeKind.Local).AddTicks(7766),
                             CustomerType = 0,
                             Email = "maria@gmail.com",
                             Name = "Maria Silva"
@@ -278,6 +271,9 @@ namespace Guilherme.LojaVirtualApi.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedDate")
@@ -287,7 +283,8 @@ namespace Guilherme.LojaVirtualApi.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("date");
 
                     b.Property<long>("DeliveryAddressId")
                         .HasColumnType("bigint");
@@ -295,93 +292,88 @@ namespace Guilherme.LojaVirtualApi.Migrations
                     b.Property<DateTime?>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<long>("PaymentId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("DeliveryAddressId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("orders");
 
                     b.HasData(
                         new
                         {
                             Id = 1L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 348, DateTimeKind.Local).AddTicks(5985),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 292, DateTimeKind.Local).AddTicks(199),
                             CustomerId = 1L,
                             Date = new DateTime(2021, 7, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DeliveryAddressId = 1L
+                            DeliveryAddressId = 1L,
+                            PaymentId = 0L
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 348, DateTimeKind.Local).AddTicks(6052),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 292, DateTimeKind.Local).AddTicks(302),
                             CustomerId = 1L,
                             Date = new DateTime(2021, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DeliveryAddressId = 2L
+                            DeliveryAddressId = 2L,
+                            PaymentId = 0L
                         });
                 });
 
-            modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.OrderProduct", b =>
+            modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.OrderItem", b =>
                 {
-                    b.Property<long>("ProductId")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("OrderId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("orderId");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("productId");
 
                     b.Property<double>("Discount")
-                        .HasColumnType("float");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("float")
+                        .HasColumnName("discount");
 
                     b.Property<double>("Price")
-                        .HasColumnType("float");
+                        .HasColumnType("float")
+                        .HasColumnName("price");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("quantity");
 
-                    b.HasKey("ProductId", "OrderId");
+                    b.HasKey("OrderId", "ProductId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("ProductId");
 
-                    b.ToTable("OrderProducts");
+                    b.ToTable("order-Items");
 
                     b.HasData(
                         new
                         {
-                            ProductId = 1L,
                             OrderId = 1L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 350, DateTimeKind.Local).AddTicks(4087),
+                            ProductId = 1L,
                             Discount = 0.0,
-                            Id = 1L,
                             Price = 2000.0,
                             Quantity = 1
                         },
                         new
                         {
-                            ProductId = 3L,
                             OrderId = 1L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 350, DateTimeKind.Local).AddTicks(4177),
+                            ProductId = 3L,
                             Discount = 0.0,
-                            Id = 2L,
                             Price = 80.0,
                             Quantity = 2
                         },
                         new
                         {
-                            ProductId = 2L,
                             OrderId = 2L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 350, DateTimeKind.Local).AddTicks(4182),
+                            ProductId = 2L,
                             Discount = 0.0,
-                            Id = 3L,
                             Price = 800.0,
                             Quantity = 1
                         });
@@ -392,6 +384,9 @@ namespace Guilherme.LojaVirtualApi.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedDate")
@@ -408,14 +403,15 @@ namespace Guilherme.LojaVirtualApi.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<int>("PaymentStatus")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("paymentStatus");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId")
                         .IsUnique();
 
-                    b.ToTable("Payments");
+                    b.ToTable("payments");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Payment");
                 });
@@ -425,6 +421,9 @@ namespace Guilherme.LojaVirtualApi.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedDate")
@@ -434,34 +433,38 @@ namespace Guilherme.LojaVirtualApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("name");
 
                     b.Property<double>("Price")
-                        .HasColumnType("float");
+                        .HasColumnType("float")
+                        .HasColumnName("price");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("products");
 
                     b.HasData(
                         new
                         {
                             Id = 1L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 346, DateTimeKind.Local).AddTicks(5852),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 289, DateTimeKind.Local).AddTicks(9399),
                             Name = "Computador",
                             Price = 2000.0
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 347, DateTimeKind.Local).AddTicks(9406),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 291, DateTimeKind.Local).AddTicks(3762),
                             Name = "Impressora",
                             Price = 800.0
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 347, DateTimeKind.Local).AddTicks(9439),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 291, DateTimeKind.Local).AddTicks(3796),
                             Name = "Mouse",
                             Price = 80.0
                         });
@@ -472,6 +475,9 @@ namespace Guilherme.LojaVirtualApi.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedDate")
@@ -481,23 +487,26 @@ namespace Guilherme.LojaVirtualApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("States");
+                    b.ToTable("states");
 
                     b.HasData(
                         new
                         {
                             Id = 1L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 349, DateTimeKind.Local).AddTicks(3477),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 292, DateTimeKind.Local).AddTicks(8007),
                             Name = "Minas Gerais"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 349, DateTimeKind.Local).AddTicks(3510),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 292, DateTimeKind.Local).AddTicks(8042),
                             Name = "São Paulo"
                         });
                 });
@@ -507,6 +516,9 @@ namespace Guilherme.LojaVirtualApi.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedDate")
@@ -519,26 +531,28 @@ namespace Guilherme.LojaVirtualApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("number");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Telephones");
+                    b.ToTable("telephones");
 
                     b.HasData(
                         new
                         {
                             Id = 1L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 349, DateTimeKind.Local).AddTicks(2363),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 292, DateTimeKind.Local).AddTicks(6868),
                             CustomerId = 1L,
                             Number = "27363323"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 349, DateTimeKind.Local).AddTicks(2405),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 292, DateTimeKind.Local).AddTicks(6919),
                             CustomerId = 1L,
                             Number = "27363323"
                         });
@@ -549,10 +563,12 @@ namespace Guilherme.LojaVirtualApi.Migrations
                     b.HasBaseType("Guilherme.LojaVirtualApi.Models.Entities.Payment");
 
                     b.Property<DateTime>("DueDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dueDate");
 
                     b.Property<DateTime?>("PayDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("payDate");
 
                     b.HasDiscriminator().HasValue("PaymentWithBillet");
 
@@ -560,7 +576,7 @@ namespace Guilherme.LojaVirtualApi.Migrations
                         new
                         {
                             Id = 2L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 349, DateTimeKind.Local).AddTicks(826),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 292, DateTimeKind.Local).AddTicks(5157),
                             OrderId = 2L,
                             PaymentStatus = 0,
                             DueDate = new DateTime(2021, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -572,7 +588,8 @@ namespace Guilherme.LojaVirtualApi.Migrations
                     b.HasBaseType("Guilherme.LojaVirtualApi.Models.Entities.Payment");
 
                     b.Property<int>("Installments")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("installments");
 
                     b.HasDiscriminator().HasValue("PaymentWithCard");
 
@@ -580,11 +597,26 @@ namespace Guilherme.LojaVirtualApi.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedDate = new DateTime(2021, 8, 8, 20, 24, 27, 348, DateTimeKind.Local).AddTicks(8942),
+                            CreatedDate = new DateTime(2021, 8, 11, 0, 20, 15, 292, DateTimeKind.Local).AddTicks(3296),
                             OrderId = 1L,
                             PaymentStatus = 1,
                             Installments = 6
                         });
+                });
+
+            modelBuilder.Entity("CategoryProduct", b =>
+                {
+                    b.HasOne("Guilherme.LojaVirtualApi.Models.Entities.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Guilherme.LojaVirtualApi.Models.Entities.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.Address", b =>
@@ -604,25 +636,6 @@ namespace Guilherme.LojaVirtualApi.Migrations
                     b.Navigation("City");
 
                     b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.CategoryProduct", b =>
-                {
-                    b.HasOne("Guilherme.LojaVirtualApi.Models.Entities.Category", "Category")
-                        .WithMany("CategoryProducts")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Guilherme.LojaVirtualApi.Models.Entities.Product", "Product")
-                        .WithMany("CategoryProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.City", b =>
@@ -655,18 +668,18 @@ namespace Guilherme.LojaVirtualApi.Migrations
                     b.Navigation("DeliveryAddress");
                 });
 
-            modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.OrderProduct", b =>
+            modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.OrderItem", b =>
                 {
                     b.HasOne("Guilherme.LojaVirtualApi.Models.Entities.Order", "Order")
-                        .WithMany("OrderProducts")
+                        .WithMany("Items")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Guilherme.LojaVirtualApi.Models.Entities.Product", "Product")
-                        .WithMany("OrderProducts")
+                        .WithMany("Items")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -694,11 +707,6 @@ namespace Guilherme.LojaVirtualApi.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.Category", b =>
-                {
-                    b.Navigation("CategoryProducts");
-                });
-
             modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.Customer", b =>
                 {
                     b.Navigation("Addresses");
@@ -710,16 +718,14 @@ namespace Guilherme.LojaVirtualApi.Migrations
 
             modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.Order", b =>
                 {
-                    b.Navigation("OrderProducts");
+                    b.Navigation("Items");
 
                     b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.Product", b =>
                 {
-                    b.Navigation("CategoryProducts");
-
-                    b.Navigation("OrderProducts");
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Guilherme.LojaVirtualApi.Models.Entities.State", b =>
