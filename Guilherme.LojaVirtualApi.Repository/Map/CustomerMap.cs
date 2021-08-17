@@ -16,7 +16,7 @@ namespace Guilherme.LojaVirtualApi.Repository.Map
             modelBuilder.Entity<Customer>().Property(c => c.Cnpj).HasColumnName("cnpj");
 
             modelBuilder.Entity<Customer>().HasMany(c => c.Addresses).WithOne(a => a.Customer).HasForeignKey(a => a.CustomerId);
-            modelBuilder.Entity<Customer>().HasMany(c => c.Orders).WithOne(o => o.Customer).HasForeignKey(o => o.CustomerId).OnDelete(DeleteBehavior.Restrict); ;
+            modelBuilder.Entity<Customer>().HasMany(c => c.Orders).WithOne(o => o.Customer).HasForeignKey(o => o.CustomerId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

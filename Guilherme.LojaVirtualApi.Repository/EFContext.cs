@@ -1,5 +1,7 @@
 ﻿using Guilherme.LojaVirtualApi.Models.Entities;
 using Guilherme.LojaVirtualApi.Models.Entities.Enums;
+using Guilherme.LojaVirtualApi.Models.Enums;
+using Guilherme.LojaVirtualApi.Repository.Map;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Guilherme.LojaVirtualApi.Repository
 {
-    public class EFContext : DbContext
+    public sealed class EFContext : DbContext
     {
         public EFContext(DbContextOptions options) : base(options)
         {
@@ -16,33 +18,35 @@ namespace Guilherme.LojaVirtualApi.Repository
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<CategoryProduct> CategoryProducts { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<OrderItem> OrderProducts { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<PaymentWithBillet> PaymentsWithBillet { get; set; }
         public DbSet<PaymentWithCard> PaymentsWithCard { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Telephone> Telephones { get; set; }
+        public DbSet<User> User { get; set; }
+
+
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(EFContext).Assembly);
-
-            modelBuilder
-                .Entity<Order>()
-                .HasOne(o => o.Customer)
-                .WithMany(c => c.Orders)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<CategoryProduct>()
-                    .HasKey(c => new { c.ProductId, c.CategoryId });
-
-            modelBuilder.Entity<OrderProduct>()
-                    .HasKey(o => new { o.ProductId, o.OrderId });
+            modelBuilder.ConfigureCategory();
+            modelBuilder.ConfigureProduct();
+            modelBuilder.ConfigureAddress();
+            modelBuilder.ConfigureCustomer();
+            modelBuilder.ConfigureOrder();
+            modelBuilder.ConfigureOrderItem();
+            modelBuilder.ConfigureState();
+            modelBuilder.ConfigureTelephone();
+            modelBuilder.ConfigurePayment();
+            modelBuilder.ConfigureCity();
+            modelBuilder.ConfigureUser();
 
             var products = new[]
             {
@@ -57,9 +61,15 @@ namespace Guilherme.LojaVirtualApi.Repository
                  new Category{Id=2, Name= "Escritorio",CreatedDate = DateTime.Now}
             };
 
+
+            var users = new[]
+            {
+                 new User{Id=1, Username= "gui123",Password="1234",CreatedDate = DateTime.Now}
+            };
+
             var customers = new[]
             {
-                 new Customer{Id = 1,Name = "Maria Silva" , Email = "maria@gmail.com",Cpf = "36378912377",CustomerType = CustomerType.PHYSICAL_PERSON,CreatedDate = DateTime.Now}
+                 new Customer{Id = 1,Name = "Maria Silva" , Email = "maria@gmail.com",Cpf = "36378912377",UserId = 1,CustomerType = CustomerType.PHYSICAL_PERSON,CreatedDate = DateTime.Now}
             };
 
             var orders = new[]
@@ -100,30 +110,21 @@ namespace Guilherme.LojaVirtualApi.Repository
             };
 
 
-
-            var catogoryProducts = new[]
-            {
-                 new CategoryProduct{Id = 1,CategoryId = 1 , ProductId = 1,CreatedDate = DateTime.Now},
-                 new CategoryProduct{Id = 2,CategoryId = 1 , ProductId = 2,CreatedDate = DateTime.Now},
-                 new CategoryProduct{Id = 3,CategoryId = 2 , ProductId = 2,CreatedDate = DateTime.Now},
-                 new CategoryProduct{Id = 4,CategoryId = 1 , ProductId = 3,CreatedDate = DateTime.Now}
-            };
-
             var orderProducts = new[]
             {
-                 new OrderProduct{Id = 1,OrderId = 1 , ProductId = 1,Discount = 0,Quantity=1,Price = 2000.00,CreatedDate = DateTime.Now},
-                 new OrderProduct{Id = 2,OrderId = 1 , ProductId = 3,Discount = 0,Quantity=2,Price = 80.00,CreatedDate = DateTime.Now},
-                 new OrderProduct{Id = 3,OrderId = 2 , ProductId = 2,Discount = 0,Quantity=1,Price = 800.00,CreatedDate = DateTime.Now}
+                 new OrderItem{OrderId = 1 , ProductId = 1,Discount = 0,Quantity=1,Price = 2000.00},
+                 new OrderItem{OrderId = 1 , ProductId = 3,Discount = 0,Quantity=2,Price = 80.00 },
+                 new OrderItem{OrderId = 2 , ProductId = 2,Discount = 0,Quantity=1,Price = 800.00 }
             };
 
 
 
             modelBuilder.Entity<Product>().HasData(products[0], products[1], products[2]);
             modelBuilder.Entity<Category>().HasData(categories[0], categories[1]);
-            modelBuilder.Entity<CategoryProduct>().HasData(catogoryProducts[0], catogoryProducts[1], catogoryProducts[2], catogoryProducts[3]);
+            modelBuilder.Entity<User>().HasData(users[0]);
             modelBuilder.Entity<Customer>().HasData(customers[0]);
             modelBuilder.Entity<Order>().HasData(orders[0], orders[1]);
-            modelBuilder.Entity<OrderProduct>().HasData(orderProducts[0], orderProducts[1], orderProducts[2]);
+            modelBuilder.Entity<OrderItem>().HasData(orderProducts[0], orderProducts[1], orderProducts[2]);
             modelBuilder.Entity<PaymentWithCard>().HasData(payments[0]);
             modelBuilder.Entity<PaymentWithBillet>().HasData(payments[1]);
             modelBuilder.Entity<State>().HasData(states[0], states[1]);
