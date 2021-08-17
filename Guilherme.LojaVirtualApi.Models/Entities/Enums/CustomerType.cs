@@ -1,4 +1,4 @@
-﻿namespace Guilherme.LojaVirtualApi.Models.Entities.Enums
+﻿namespace Guilherme.LojaVirtualApi.Models.Enums
 {
     public enum CustomerType
     {
