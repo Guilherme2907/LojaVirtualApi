@@ -1,16 +1,20 @@
+using Guilherme.LojaVirtualApi.Middlewares;
+using Guilherme.LojaVirtualApi.Models.Exceptions;
 using Guilherme.LojaVirtualApi.Repository;
+using Guilherme.LojaVirtualApi.Repository.Implementations;
+using Guilherme.LojaVirtualApi.Repository.Interfaces;
+using Guilherme.LojaVirtualApi.Services.ExceptionHandlingStrategies;
+using Guilherme.LojaVirtualApi.Services.Implementations;
+using Guilherme.LojaVirtualApi.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
+using Serilog;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Guilherme.LojaVirtualApi
 {
@@ -26,8 +30,31 @@ namespace Guilherme.LojaVirtualApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                 .AddNewtonsoftJson(options =>
+                 {
+                     options.SerializerSettings.ContractResolver =
+                                                  new DefaultContractResolver();
+                 });
+
             services.AddRepositoryServices(Configuration);
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<ICategoryService, CategoryService>();
+
+            services.AddSingleton(provider =>
+            {
+                var logger = provider.GetService<ILogger>();
+                return new Dictionary<Type, ExceptionHandlingStrategy>
+                {
+                    { typeof(NotFoundException), new NotFoundExceptionHandlingStrategy(logger) }
+                };
+            });
+
+            services.AddSingleton<ILogger>(new LoggerConfiguration()
+               .ReadFrom.Configuration(Configuration)
+               .Enrich.WithMachineName()
+               .CreateLogger());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +64,8 @@ namespace Guilherme.LojaVirtualApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
 
