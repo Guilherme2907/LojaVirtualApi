@@ -1,4 +1,4 @@
-﻿namespace Guilherme.LojaVirtualApi.Models.Responses.Enums
+﻿namespace Guilherme.LojaVirtualApi.Models.DTOs.Responses.Enums
 {
     public enum ErrorResult
     {

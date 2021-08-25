@@ -1,5 +1,5 @@
-﻿using Guilherme.LojaVirtualApi.Models.Responses;
-using Guilherme.LojaVirtualApi.Models.Responses.Enums;
+﻿using Guilherme.LojaVirtualApi.Models.DTOs.Responses;
+using Guilherme.LojaVirtualApi.Models.DTOs.Responses.Enums;
 using Guilherme.LojaVirtualApi.Services.ExceptionHandlingStrategies;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;

@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading.Tasks;
-using Serilog;
-using Guilherme.LojaVirtualApi.Models.Responses.Enums;
+using Guilherme.LojaVirtualApi.Models.DTOs.Responses.Enums;
 
 namespace Guilherme.LojaVirtualApi.Services.ExceptionHandlingStrategies
 {

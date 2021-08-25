@@ -1,9 +1,9 @@
-﻿using Guilherme.LojaVirtualApi.Models.Responses.Enums;
+﻿using Guilherme.LojaVirtualApi.Models.DTOs.Responses.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 
-namespace Guilherme.LojaVirtualApi.Models.Responses
+namespace Guilherme.LojaVirtualApi.Models.DTOs.Responses
 {
     public class ErrorResponse
     {

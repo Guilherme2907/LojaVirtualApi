@@ -28,7 +28,7 @@ namespace Guilherme.LojaVirtualApi.Repository
         public DbSet<PaymentWithCard> PaymentsWithCard { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Telephone> Telephones { get; set; }
-        public DbSet<User> User { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
 

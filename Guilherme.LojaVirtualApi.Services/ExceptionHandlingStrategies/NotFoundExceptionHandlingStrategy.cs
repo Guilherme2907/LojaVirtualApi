@@ -1,5 +1,5 @@
-﻿using Guilherme.LojaVirtualApi.Models.Exceptions;
-using Guilherme.LojaVirtualApi.Models.Responses.Enums;
+﻿using Guilherme.LojaVirtualApi.Models.DTOs.Responses.Enums;
+using Guilherme.LojaVirtualApi.Models.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Serilog;
 using System;
