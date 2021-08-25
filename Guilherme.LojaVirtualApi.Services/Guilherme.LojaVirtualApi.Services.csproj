@@ -14,9 +14,4 @@
     <ProjectReference Include="..\Guilherme.LojaVirtualApi.Repository\Guilherme.LojaVirtualApi.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Implementations\" />
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
 </Project>
